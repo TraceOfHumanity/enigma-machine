@@ -1,73 +1,13 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>fractal</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        canvas {
-            display: block;
-        }
-    </style>
-</head>
-
-<body>
-    <canvas id="gardun"></canvas>
-</body>
-
-<script>
-    const canvas = document.getElementById("gardun");
-    const m = canvas.getContext("2d");
-
-    let scale = 1.0; // Початковий масштаб
-
-    function drawFractal() {
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-
-        atom = function (x, y, c) { m.fillStyle = c; m.fillRect(x, y, 3, 3) }
-
-        for (y = 1; y < canvas.height; y++) {
-            for (x = 1; x < canvas.width; x++) {
-                dx = (x - canvas.width / 2) / (100000 * scale) - 0.233;
-                dy = (y - canvas.height / 2) / (100000 * scale) - 0.655;
-                a = dx;
-                b = dy;
-                for (t = 1; t < 500; t++) {
-                    d = (a * a) - (b * b) + dx;
-                    b = 2 * (a * b) + dy;
-                    a = d;
-                    H = d > 200;
-                    if (H) {
-                        // atom(x, y, "rgb(" + t * 3 + "," + t + "," + t * 0.5 + ")"); break;
-                        const red = t * 3;
-                        const green = t;
-                        const blue = t * 0.5;
-                        const color = "rgb(" + red + "," + green + "," + blue + ")";
-                        atom(x, y, color);
-                        break;
-                    }
-                }
-            }
-        }
-
-        // Збільшуємо масштаб з кожним кадром для плавного наближення
-        scale++;
-
-        // Рекурсивно оновлюємо фрактал для наступного кадру
-        requestAnimationFrame(drawFractal);
-    }
-
-    // Викликаємо функцію для початку анімації
-    drawFractal();
-
-</script>
-
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>enigma-machine</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
 </html>
